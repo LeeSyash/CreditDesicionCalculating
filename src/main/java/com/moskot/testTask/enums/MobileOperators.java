@@ -1,4 +1,4 @@
-package com.moskot.testTask;
+package com.moskot.testTask.enums;
 
 import lombok.Getter;
 
