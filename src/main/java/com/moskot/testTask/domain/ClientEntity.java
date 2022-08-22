@@ -1,4 +1,4 @@
-package com.moskot.testTask.daos;
+package com.moskot.testTask.domain;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +14,7 @@ import java.util.Date;
 @Table(name = "client")
 @Getter
 @Setter
-public class ClientDao {
+public class ClientEntity {
     @Id
     @Column(name = "idClient", nullable = false)
     private Integer idClient;
@@ -37,10 +37,10 @@ public class ClientDao {
     @Column(name = "limitItog")
     private Double limitItog;
 
-    public ClientDao() {
+    public ClientEntity() {
     }
 
-    public ClientDao(Integer idClient, String phone, String mail, String address, Double monthSalary, String CurrSalary, String decision, Double limitItog) {
+    public ClientEntity(Integer idClient, String phone, String mail, String address, Double monthSalary, String CurrSalary, String decision, Double limitItog) {
         this.idClient = idClient;
         this.phone = phone;
         this.mail = mail;

@@ -1,27 +1,35 @@
 package com.moskot.testTask.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.moskot.testTask.daos.ClientDao;
-import com.moskot.testTask.daos.ClientRepository;
-import com.moskot.testTask.daos.CreditRepository;
+import com.moskot.testTask.domain.ClientEntity;
+import com.moskot.testTask.services.interfaces.IClientRepository;
+import com.moskot.testTask.services.interfaces.ICreditRepository;
 import com.moskot.testTask.dtos.ClientDto;
 import com.moskot.testTask.enums.MobileOperators;
 import com.moskot.testTask.exceptions.CurrencyNotFoundException;
+import com.moskot.testTask.services.interfaces.ICreditDecisionService;
+import com.moskot.testTask.services.interfaces.ICurrencyExchangeService;
+import com.moskot.testTask.services.interfaces.IDatesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CreditDecisionService {
+public class CreditDecisionService implements ICreditDecisionService {
+
+    private final ICurrencyExchangeService currencyExchangeService;
+    private final IClientRepository clientRepository;
+    private final ICreditRepository creditRepository;
+    private final IDatesService datesService;
 
     @Autowired
-    private CurrencyExchangeService currencyExchangeService;
-    @Autowired
-    private ClientRepository clientRepository;
-    @Autowired
-    private CreditRepository creditRepository;
-    @Autowired
-    private DatesService datesService;
+    public CreditDecisionService(ICurrencyExchangeService currencyExchangeService, IClientRepository clientRepository, ICreditRepository creditRepository, IDatesService datesService) {
+        this.currencyExchangeService = currencyExchangeService;
+        this.clientRepository = clientRepository;
+        this.creditRepository = creditRepository;
+        this.datesService = datesService;
+    }
 
+    @Override
     public void calculateDecision(ClientDto clientDto) throws JsonProcessingException, CurrencyNotFoundException {
         Double monthSalaryNationalCurr = currencyExchangeService.getAmountInNationalCurr(clientDto.getMonthSalary(), clientDto.getCurrSalary());
         Double limitItog = 0d;
@@ -33,7 +41,7 @@ public class CreditDecisionService {
                 limitItog = (limitItog > clientDto.getRequestLimit()) ? clientDto.getRequestLimit() : limitItog;
             }
         }
-        ClientDao clientDao = new ClientDao(
+        ClientEntity clientEntity = new ClientEntity(
                 clientDto.getIdClient(),
                 clientDto.getPhone(),
                 clientDto.getMail(),
@@ -43,7 +51,7 @@ public class CreditDecisionService {
                 (limitItog > 0) ? "accept" : "decline",
                 limitItog
         );
-        clientRepository.save(clientDao);
+        clientRepository.save(clientEntity);
     }
 
     private float calculateK(String phone) {

@@ -2,7 +2,6 @@ package com.moskot.testTask.enums;
 
 import lombok.Getter;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 

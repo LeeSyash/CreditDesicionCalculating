@@ -15,8 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class CreditsController {
+    private final CreditDecisionService creditDecisionService;
+
     @Autowired
-    private CreditDecisionService creditDecisionService;
+    public CreditsController(CreditDecisionService creditDecisionService) {
+        this.creditDecisionService = creditDecisionService;
+    }
 
     @PostMapping(path = "/credits/calculateCreditDecision", consumes = "application/json")
     public ResponseEntity calculateLimit(@Validated @RequestBody ClientDto clientDto) throws JsonProcessingException, CurrencyNotFoundException {

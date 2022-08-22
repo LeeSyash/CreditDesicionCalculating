@@ -1,4 +1,4 @@
-package com.moskot.testTask.daos;
+package com.moskot.testTask.domain;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +13,7 @@ import java.util.Date;
 @Table(name = "credit")
 @Getter
 @Setter
-public class CreditDao {
+public class CreditEntity {
     @Id
     @Column(name = "idClient", nullable = false)
     private Integer idClient;
