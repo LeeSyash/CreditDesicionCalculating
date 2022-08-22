@@ -1,8 +1,9 @@
 package com.moskot.testTask.dtos;
 
 import lombok.Getter;
+import lombok.ToString;
 
-@Getter
+@Getter @ToString
 public class CurrencyExchangeDto {
     private String ccy;
     private String base_ccy;

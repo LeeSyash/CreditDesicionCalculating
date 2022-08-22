@@ -1,10 +1,11 @@
 package com.moskot.testTask.dtos;
 
 import lombok.Getter;
+import lombok.ToString;
 
 import javax.validation.constraints.NotNull;
 
-@Getter
+@Getter @ToString
 public class ClientDto {
     @NotNull
     private Integer idClient;

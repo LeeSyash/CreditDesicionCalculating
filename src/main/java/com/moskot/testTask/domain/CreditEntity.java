@@ -2,6 +2,7 @@ package com.moskot.testTask.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,7 +11,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "credit")
-@Getter @Setter
+@Getter @Setter @ToString
 @IdClass(CreditEntity.class)
 public class CreditEntity implements Serializable {
     @Id

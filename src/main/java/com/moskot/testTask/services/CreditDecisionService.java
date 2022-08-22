@@ -10,9 +10,10 @@ import com.moskot.testTask.exceptions.CurrencyNotFoundException;
 import com.moskot.testTask.services.interfaces.ICreditDecisionService;
 import com.moskot.testTask.services.interfaces.ICurrencyExchangeService;
 import com.moskot.testTask.services.interfaces.IDatesService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+@Slf4j
 @Service
 public class CreditDecisionService implements ICreditDecisionService {
 
@@ -41,6 +42,8 @@ public class CreditDecisionService implements ICreditDecisionService {
                 limitItog = (limitItog > clientDto.getRequestLimit()) ? clientDto.getRequestLimit() : limitItog;
             }
         }
+        String decision = (limitItog > 0) ? "accept" : "decline";
+        log.info("Decision for client {}: limit - {}, decision - {}", clientDto.getIdClient(), limitItog, decision);
         ClientEntity clientEntity = new ClientEntity(
                 clientDto.getIdClient(),
                 clientDto.getPhone(),
@@ -48,7 +51,7 @@ public class CreditDecisionService implements ICreditDecisionService {
                 clientDto.getAddress(),
                 clientDto.getMonthSalary(),
                 clientDto.getCurrSalary(),
-                (limitItog > 0) ? "accept" : "decline",
+                decision,
                 limitItog
         );
         clientRepository.save(clientEntity);
