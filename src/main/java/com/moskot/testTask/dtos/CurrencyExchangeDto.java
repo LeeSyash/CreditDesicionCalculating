@@ -1,9 +1,11 @@
 package com.moskot.testTask.dtos;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
-@Getter @ToString
+@Getter @Setter
+@ToString
 public class CurrencyExchangeDto {
     private String ccy;
     private String base_ccy;
@@ -15,6 +17,9 @@ public class CurrencyExchangeDto {
         this.base_ccy = base_ccy;
         this.buy = buy;
         this.sale = sale;
+    }
+
+    public CurrencyExchangeDto() {
     }
 
     public float getFloatBuy() {

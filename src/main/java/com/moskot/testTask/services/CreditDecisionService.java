@@ -57,7 +57,7 @@ public class CreditDecisionService implements ICreditDecisionService {
         clientRepository.save(clientEntity);
     }
 
-    private float calculateK(String phone) {
+    public float calculateK(String phone) {
         String clientPhoneCode = phone.substring(phone.length() - 7).substring(0, phone.length() - 10);
         if (MobileOperators.KYIVSTAR.getCodes().contains(clientPhoneCode)) {
             return MobileOperators.KYIVSTAR.getK();

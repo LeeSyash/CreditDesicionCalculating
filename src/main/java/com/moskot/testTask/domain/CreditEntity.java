@@ -27,6 +27,17 @@ public class CreditEntity implements Serializable {
     @Column(name = "stateCredit", nullable = false)
     private Character stateCredit;
 
+    public CreditEntity(Integer idClient, Integer idCredit, Double amtCredit, Date dateStart, Character stateCredit) {
+        this.idClient = idClient;
+        this.idCredit = idCredit;
+        this.amtCredit = amtCredit;
+        this.dateStart = dateStart;
+        this.stateCredit = stateCredit;
+    }
+
+    public CreditEntity() {
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

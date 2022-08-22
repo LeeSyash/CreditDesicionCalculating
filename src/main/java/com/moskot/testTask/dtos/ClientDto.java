@@ -1,11 +1,13 @@
 package com.moskot.testTask.dtos;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import javax.validation.constraints.NotNull;
 
-@Getter @ToString
+@Getter @Setter
+@ToString
 public class ClientDto {
     @NotNull
     private Integer idClient;
@@ -32,5 +34,6 @@ public class ClientDto {
         this.requestLimit = requestLimit;
     }
 
-
+    public ClientDto() {
+    }
 }
