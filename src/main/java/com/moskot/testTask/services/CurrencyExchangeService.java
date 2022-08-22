@@ -35,15 +35,9 @@ public class CurrencyExchangeService implements ICurrencyExchangeService {
     public float getBuyRate(String currency) throws JsonProcessingException {
         return getCurrencyExchange(currency).getFloatBuy();
     }
-
-    private CurrencyExchangeDto getCurrencyExchange(String currency) throws JsonProcessingException, CurrencyNotFoundException {
-        final String uri = "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5";
-
-        RestTemplate restTemplate = new RestTemplate();
-        String result = restTemplate.getForObject(uri, String.class);
-        ObjectMapper objectMapper = new ObjectMapper();
-        List<CurrencyExchangeDto> currencyExchangeRates = objectMapper.readValue(result,new TypeReference<List<CurrencyExchangeDto>>(){});
-        log.debug(currencyExchangeRates.stream().map(CurrencyExchangeDto::toString).reduce("", String::concat));
+    @Override
+    public CurrencyExchangeDto getCurrencyExchange(String currency) throws JsonProcessingException, CurrencyNotFoundException {
+        List<CurrencyExchangeDto> currencyExchangeRates = getCurrencyExchanges(currency);
         for (CurrencyExchangeDto currencyExchange:
                 currencyExchangeRates) {
             if (currencyExchange.getCcy().equals(currency)) {
@@ -51,5 +45,16 @@ public class CurrencyExchangeService implements ICurrencyExchangeService {
             }
         }
         throw new CurrencyNotFoundException("Currency exchange rates for " + currency + " doesn`t exist");
+    }
+    @Override
+    public List<CurrencyExchangeDto> getCurrencyExchanges(String currency) throws JsonProcessingException, CurrencyNotFoundException {
+        final String uri = "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5";
+
+        RestTemplate restTemplate = new RestTemplate();
+        String result = restTemplate.getForObject(uri, String.class);
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<CurrencyExchangeDto> currencyExchangeRates = objectMapper.readValue(result,new TypeReference<List<CurrencyExchangeDto>>(){});
+        log.debug(currencyExchangeRates.stream().map(CurrencyExchangeDto::toString).reduce("", String::concat));
+        return currencyExchangeRates;
     }
 }
