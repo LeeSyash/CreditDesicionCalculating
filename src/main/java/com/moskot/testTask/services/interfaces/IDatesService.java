@@ -6,4 +6,5 @@ public interface IDatesService {
     int getFullAge(LocalDate dateBirthday);
 
     LocalDate parseLocalDateFromString(String date);
+    int getFullAge(String dateBirthday);
 }

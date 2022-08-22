@@ -11,6 +11,12 @@ import java.time.format.DateTimeFormatter;
 public class DatesService implements IDatesService {
 
     @Override
+    public int getFullAge(String dateBirthday) {
+        LocalDate parsedDB = parseLocalDateFromString(dateBirthday);
+        return getFullAge(parsedDB);
+    }
+
+    @Override
     public int getFullAge(LocalDate dateBirthday) {
         LocalDate current = LocalDate.now();
         return Period.between(dateBirthday,current).getYears();
