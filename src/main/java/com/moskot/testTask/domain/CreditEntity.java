@@ -3,17 +3,16 @@ package com.moskot.testTask.domain;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "credit")
-@Getter
-@Setter
-public class CreditEntity {
+@Getter @Setter
+@IdClass(CreditEntity.class)
+public class CreditEntity implements Serializable {
     @Id
     @Column(name = "idClient", nullable = false)
     private Integer idClient;
@@ -26,5 +25,18 @@ public class CreditEntity {
     private Date dateStart;
     @Column(name = "stateCredit", nullable = false)
     private Character stateCredit;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CreditEntity that = (CreditEntity) o;
+        return idClient.equals(that.idClient) && idCredit.equals(that.idCredit);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idClient, idCredit);
+    }
 
 }

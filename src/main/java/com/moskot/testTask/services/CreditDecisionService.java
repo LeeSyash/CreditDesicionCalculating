@@ -5,7 +5,7 @@ import com.moskot.testTask.domain.ClientEntity;
 import com.moskot.testTask.services.interfaces.IClientRepository;
 import com.moskot.testTask.services.interfaces.ICreditRepository;
 import com.moskot.testTask.dtos.ClientDto;
-import com.moskot.testTask.enums.MobileOperators;
+import com.moskot.testTask.utils.enums.MobileOperators;
 import com.moskot.testTask.exceptions.CurrencyNotFoundException;
 import com.moskot.testTask.services.interfaces.ICreditDecisionService;
 import com.moskot.testTask.services.interfaces.ICurrencyExchangeService;

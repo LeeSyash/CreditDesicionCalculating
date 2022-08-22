@@ -30,4 +30,6 @@ public class ClientDto {
         this.CurrSalary = CurrSalary;
         this.requestLimit = requestLimit;
     }
+
+
 }

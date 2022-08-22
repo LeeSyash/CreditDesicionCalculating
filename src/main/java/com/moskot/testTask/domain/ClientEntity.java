@@ -4,17 +4,16 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "client")
-@Getter
-@Setter
-public class ClientEntity {
+@Getter @Setter
+@IdClass(ClientEntity.class)
+public class ClientEntity implements Serializable {
     @Id
     @Column(name = "idClient", nullable = false)
     private Integer idClient;
@@ -51,5 +50,16 @@ public class ClientEntity {
         this.limitItog = limitItog;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ClientEntity that = (ClientEntity) o;
+        return idClient.equals(that.idClient) && dateCurr.equals(that.dateCurr);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(idClient, dateCurr);
+    }
 }

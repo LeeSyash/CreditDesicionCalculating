@@ -23,4 +23,6 @@ public class CurrencyExchangeDto {
     public float getFloatSale() {
         return Float.parseFloat(sale);
     }
+
+
 }
