@@ -23,7 +23,7 @@ public class ClientDto {
     private String CurrSalary;
     private Double requestLimit;
 
-    public ClientDto(Integer idClient, String dateBirthday, String phone, String mail, String address, Double monthSalary, String CurrSalary, Double requestLimit) {
+    public ClientDto(int idClient, String dateBirthday, String phone, String mail, String address, Double monthSalary, String CurrSalary, Double requestLimit) {
         this.idClient = idClient;
         this.dateBirthday = dateBirthday;
         this.phone = phone;

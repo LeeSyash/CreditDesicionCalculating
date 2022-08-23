@@ -37,7 +37,7 @@ public class CurrencyExchangeService implements ICurrencyExchangeService {
     }
     @Override
     public CurrencyExchangeDto getCurrencyExchange(String currency) throws JsonProcessingException, CurrencyNotFoundException {
-        List<CurrencyExchangeDto> currencyExchangeRates = getCurrencyExchanges(currency);
+        List<CurrencyExchangeDto> currencyExchangeRates = getCurrencyExchanges();
         for (CurrencyExchangeDto currencyExchange:
                 currencyExchangeRates) {
             if (currencyExchange.getCcy().equals(currency)) {
@@ -47,7 +47,7 @@ public class CurrencyExchangeService implements ICurrencyExchangeService {
         throw new CurrencyNotFoundException("Currency exchange rates for " + currency + " doesn`t exist");
     }
     @Override
-    public List<CurrencyExchangeDto> getCurrencyExchanges(String currency) throws JsonProcessingException, CurrencyNotFoundException {
+    public List<CurrencyExchangeDto> getCurrencyExchanges() throws JsonProcessingException, CurrencyNotFoundException {
         final String uri = "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5";
 
         RestTemplate restTemplate = new RestTemplate();

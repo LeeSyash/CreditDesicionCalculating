@@ -11,5 +11,5 @@ import org.springframework.stereotype.Repository;
 public interface ICreditRepository extends CrudRepository<CreditEntity, CreditPK> {
 
     @Query(value = "SELECT SUM(creditDao.getAmtCredit) FROM CreditDao creditDao WHERE creditDao.getIdClient = :idClient AND creditDao.getStateCredit = 'O'", nativeQuery = true)
-    public Double getSumOpenCredits(@Param("idClient") Integer idClient);
+    Double getSumOpenCredits(@Param("idClient") Integer idClient);
 }

@@ -15,5 +15,5 @@ public interface ICurrencyExchangeService {
 
     CurrencyExchangeDto getCurrencyExchange(String currency) throws JsonProcessingException, CurrencyNotFoundException;
 
-    List<CurrencyExchangeDto> getCurrencyExchanges(String currency) throws JsonProcessingException, CurrencyNotFoundException;
+    List<CurrencyExchangeDto> getCurrencyExchanges() throws JsonProcessingException, CurrencyNotFoundException;
 }
